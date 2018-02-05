@@ -1,0 +1,25 @@
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+  <button class="btn btn-default btn-lg" (click)='Add_Product()'>Click here for Billing</button>
+</div>
+<h2>PRODUCT ENTRY</h2>
+<ul>
+  <li>
+    <h2><a target="_blank" rel="noopener" href="https:// ">Add Product</a></h2>
+  </li>
+  <li>
+    <h2><a target="_blank" rel="noopener" href="https:// ">Search Product</a></h2>
+  </li>
+  <li>
+    <h2><a target="_blank" rel="noopener" href="https:// ">List of Products</a></h2>
+  </li>
+</ul>
+<div class="row">
+  <caption>Product_Table</caption>
+  <Input [(ngModel)]='prodcode' type="Product code" placeholder="Product_Code" />
+  <Input [(ngModel)]='prodname' type="Product name" placeholder="Product_Name" />
+  <Input [(ngModel)]='prodprice' type="Product price" placeholder="Product_Price" />
+  <Input [(ngModel)]='prodgst' type="Product gst" placeholder="Product_GST" />
+</div>
