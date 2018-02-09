@@ -1,0 +1,188 @@
+
+    <html>
+     
+    <head>
+     
+     
+    <title>Conference Order Form</title>
+    <script language="JavaScript">
+
+    var ListCount = 2
+     
+    var Prices = new Array(ListCount)
+    Prices[0] = 175.00
+    Prices[1] = 230.00
+     
+     
+    function format(expr, decplaces) {
+      var str = "" + Math.round(eval(expr) * Math.pow(10,decplaces))
+     
+      while (str.length <= decplaces) {
+        str = "0" + str
+      }
+     
+      var decpoint = str.length - decplaces
+     
+      return str.substring(0,decpoint) + "." + str.substring(decpoint, str.length);
+    }
+     
+    function RefreshTotals(form) {
+     
+      // Calculate individual rows and accumulate sub total
+     
+      var SubTotal = 0.00
+      for (var i = 0; i < ListCount; i++) {
+        var ColumnTotal = form["Q" + i].value * Prices[i]
+        SubTotal = SubTotal + ColumnTotal
+        if (ColumnTotal == 0)
+          form["CT" + i].value = ""
+        else
+          form["CT" + i].value = "$" + format(ColumnTotal, 2)
+      }
+     
+      if (SubTotal == 0)
+        form.ST.value = ""
+      else
+        form.ST.value = "$" + format(SubTotal, 2)
+     
+      // Calculate GST
+     
+      var GST = 12.5
+      var GSTamt = 0.01 * GST * SubTotal;
+      var Total = GSTamt + SubTotal;
+      //var SelectButtonIndex = 0
+      //for (var i = 0; i < form.R1.length; i++) {
+      //  if (form.R1[i].checked) {
+      //    SelectButtonIndex = i
+      //  }
+      //}
+     
+      //if (form.R1[SelectButtonIndex].value == "N") {
+        // don't fill these fields for international orders
+        form.GST.value = "$" + format(GSTamt,2);
+       // form.PH.value = "$0.00"
+        form.T.value = "$" + format(Total,2)
+      //  }
+      //else {
+      //  GST = SubTotal * 0.1
+      //
+      //  if (GST == 0.00)
+      //    form.GST.value = ""
+      //  else
+      //    form.GST.value = "$" + format(GST, 2)
+      //
+      //  // Postage and Handling
+      //
+      //  var PH = 0.00
+      //  //if (SubTotal <= 50.00)
+      //  //  PH = 5.50
+      //  //else if (SubTotal <= 100.00)
+      //  //  PH = 7.50
+      //  //else
+      //  //  PH = 9.50
+      //
+      //  if (PH == 0)
+      //    form.PH.value = "$0.00"
+      //  else
+      //    form.PH.value = "$" + format(PH, 2)
+      //
+      //  // Calculate Grand Total
+      //
+      //  var GrandTotal = SubTotal + GST + PH
+      //
+      //  if (GrandTotal == 0)
+      //    form.T.value = ""
+      //  else
+      //    form.T.value = "$" + format(GrandTotal,2)
+      //  }
+    }
+     
+    //-->
+    </script>
+    </head>
+     
+    <body>
+            
+    <div align="left"> </div>
+            <form method="POST">
+      <div align="left"> </div>
+      <div align="left">
+        <table border="0" cellpadding="0" cellspacing="0" width="750">
+          <tr> 
+            <td width="462"><b><font face="Arial,Helvetica,Sans Serif" size="2">Name</font></b> 
+            </td>
+            <td width="108" align="left"> </td>
+            <td width="54" align="left"><b><font face="Arial,Helvetica,Sans Serif" size="2">Qty</font></b> 
+            </td>
+            <td width="59" align="right"> </td>
+            <td width="17" align="left"></td>
+            <td width="76" align="left"><b><font face="Arial,Helvetica,Sans Serif" size="2">Subtotal</font></b> 
+            </td>
+          </tr>
+     
+          <tr> 
+            <td width="462"><font face="Arial,Helvetica,Sans Serif" size="2">Land 
+              Package </font></td>
+            <td width="108" align="left"> </td>
+            <td width="54" align="left"><input type="text" name="Q0" size="4" onChange="RefreshTotals(this.form)"></td>
+            <td width="59" align="right"> </td>
+            <td width="17" align="left"></td>
+            <td width="76" align="left"><input type="text" name="CT0" size="7"></td>
+          </tr>
+          <tr> 
+            <td width="462"><font face="Arial,Helvetica,Sans Serif" size="2">Hotel 
+              Only </font></td>
+            <td width="108" align="left"> </td>
+            <td width="54" align="left"><input type="text" name="Q1" size="4" onChange="RefreshTotals(this.form)"></td>
+            <td width="59" align="right"> </td>
+            <td width="17" align="left"></td>
+            <td width="76" align="left"><input type="text" name="CT1" size="7"></td>
+          </tr>
+          <tr> 
+            <td width="462"> </td>
+            <td width="108" align="left"> </td>
+            <td width="54" align="left"> </td>
+            <td width="59" align="right"> </td>
+            <td width="17" align="left"></td>
+            <td width="76" align="left"> </td>
+          </tr>
+          
+          <tr> 
+            <td colspan="3" width="626"> <p align="right"><font face="Arial,Helvetica,Sans Serif" size="2"><b>Sub 
+                Total</b></font></td>
+            <td width="59" align="left"></td>
+            <td width="12" align="left"></td>
+            <td width="71" align="left"><input type="text" name="ST" size="7"></td>
+          </tr>
+          <tr> 
+            <td colspan="2" width="572"> <p align="right"><font face="Arial,Helvetica,Sans Serif" size="2">        </font></p></td><center>
+            <td width="54" align="left"><font face="Arial,Helvetica,Sans Serif" size="2">G.S.T.</font></td>
+            <td width="59" align="right"><font face="Arial,Helvetica,Sans Serif" size="2">12.5% 
+              </font></td>
+            <td width="17" align="left"></td>
+            <td width="76" align="left"><input type="text" name="GST" size="7"></td>
+          </tr>
+          <!--tr> 
+            <td colspan="3" width="626"> <p align="right"><font face="Arial,Helvetica,Sans Serif" size="2">Freight 
+                / Postage &amp; Packaging</font></td><center>
+            <td width="59" align="left"></td>
+            <td width="12" align="left"></td>
+            <td width="71" align="left"><input type="text" name="PH" size="7"></td>
+          </tr-->
+          <tr> 
+            <td colspan="3" width="626"> <p align="right"><font face="Arial,Helvetica,Sans Serif" size="2"><b>Total 
+                Amount </b></font></td><center>
+            <td width="59" align="left"></td>
+            <td width="12" align="left"></td>
+            <td width="71" align="left"><input type="text" name="T" size="7"></td>
+          </tr>
+        </table>
+      </div>
+      <p><font face="Arial,Helvetica,Sans Serif" size="2">  </font>
+    <input type="reset" value="Clear Order Form" name="B2">
+      </p>
+      </form>
+     
+    </body>
+     
+    </html>

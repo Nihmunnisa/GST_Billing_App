@@ -1,0 +1,52 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<script type="text/javascript">
+function updatePrice() {
+      // Get the ex-GST price from its form element
+var exPrice = document.getElementById("ex-gst").value;
+var TPrice = document.getElementById("gst").value;
+
+// Get the GST price
+gstPrice = exPrice * 0.1;
+TPrice = gstPrice + exPrice;
+
+// Set the GST price in its form element
+document.getElementById("gst").value = gstPrice;
+document.getElementById("inc-gst").value = TPrice;
+
+}
+</script>
+
+<table border=0 cellspacing=2 cellpadding=2>
+      <tr>
+        <th width="5"> </th>
+        <th width="264"> </th>
+        <th><font size="2" face="Geneva, Arial, Helvetica, sans-serif">Attendees</font></th>
+      </tr>
+      <tr>
+        <td align=center> </td>
+        <td align=right>Calculate</td>
+        <td align=right> <input id="ex-gst" name="ex-gst" value="0.00" size=7 maxlength=10 onChange="updatePrice()"></td>
+      </tr>
+      <tr>
+        <td align=center> </td>
+        <td align=right> 12.5% G.S.T </td>
+        <td align=right> <input type=text id="gst" name="gst" size=7 maxlength=10 value="0.00" onChange="updatePrice()"></td>
+      </tr>
+      <tr>
+        <td align=center> </td>
+        <td align=right>Total Payable</td>
+        <td align=right> $
+            <input name="inc-gst" id="inc-gst" type="text" value="0.00" size=7 maxlength=10  onChange="updatePrice(this.form)">
+        </td>
+      </tr>
+  </table>
+
+
+</body>
+</html>
